@@ -70,11 +70,12 @@
 	$sifra = $sql->real_escape_string($sifra);
 	$time = time();
 
-	$rezultat = $sql->querry("SELECT ID FROM korisnici WHERE IME = '{$ime}' AND PASSWORD = '{$sifra}' AND EMAIL = '{$email}'");
-	
+	$rezultat = $sql->query("SELECT ID FROM korisnici WHERE IME = '{$ime}' AND PASSWORD = '{$sifra}' AND EMAIL = '{$email}'");
+
 	if($rezultat->num_rows >= 1)
 	{
 		header("Location: welcome.php");
+		exit();
 	}
 
 

@@ -1,3 +1,11 @@
+<?php
+	if(session_status() == PHP_SESSION_NONE)
+	{
+		session_start();
+	}
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,13 +23,19 @@
 			<p> NE</p><input type="radio" name="robotcheck" required onchange="document.getElementById('button').disabled = !this.checked;">
 		</form>
 		<h1>LOGIN</h1>
+		<?php if( !isset($_SESSION['ulogovan'])) { ?>
 		<form action="login.php" method="POST">
-			<input type="text" name="ime" placeholder="Unesite ime" required />
 			<input type="email" name="email" placeholder="Unesite e-mail" required />
+			<input type="password" name="sifra" placeholder="Unesite sifru" required />
 			<input type="submit" value="uloguj se" disabled id="button2" />
 			<p>Da li si robot? DA</p><input type="radio" name="robotcheck" required onchange="document.getElementById('button2').disabled = this.checked">
 			<p> NE</p><input type="radio" name="robotcheck" required onchange="document.getElementById('button2').disabled = !this.checked;">
 		</form>
+		<?php } ?>
+		<?php if (isset($_SESSION['ulogovan'])) { ?>
+		<h3>Vec ste ulogovani.</h3>
+		<a href="logout.php" id="logout">Odjavi se</a>
+		<?php } ?>
 
 	<script
   src="http://code.jquery.com/jquery-3.3.1.js"
